@@ -1,0 +1,45 @@
+.side{
+    background-color: aliceblue;
+    height: max-content;
+   
+}
+.display{
+    background-color: aquamarine;
+    height: max-content;
+  
+}
+form{
+    display: flex;
+    flex-direction: column;
+   
+    justify-content: space-between;
+}
+
+[class*="col"] {
+    width: 100%;
+    float: left;
+  }
+@media only screen and (min-width:1200px) {
+    .side{
+        background-color: rgb(187, 17, 136);
+        width: 40%;
+       
+    }
+    .display{
+        background-color: rgb(37, 8, 46);
+        width: 60%;
+      
+    }
+}
+@media only screen and (min-width:768px) {
+    .side{
+        background-color: rgb(187, 17, 136);
+        width: 30%;
+       
+    }
+    .display{
+        background-color: rgb(37, 8, 46);
+        width: 70%;
+      
+    }
+}
