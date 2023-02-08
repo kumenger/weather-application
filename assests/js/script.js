@@ -2,7 +2,8 @@ var submit = document.getElementById("submit");
 var oEL = document.getElementById("serchHistory");
 var todayWeather = document.getElementById("today");
 var weekforcastEL = document.getElementById("fivedays");
-var modal=document.getElementById('modal-content')
+var newh3hold = document.getElementById("newh3hold");
+var display=document.getElementById('display')
 var openWatherApiKey = "87710827a4c6f11401d8a2d244caad74";
 var cityValue = document.getElementById("cityInput");
 var cities = JSON.parse(localStorage.getItem("cities") || "[]");
@@ -14,6 +15,8 @@ window.addEventListener("load", () => {
   if (SerchHistory) {
     for (var elem of SerchHistory) {
       var liEl = document.createElement("li");
+      liEl.classList.add("styleList");
+
       liEl.textContent = elem.cityame;
       oEL.appendChild(liEl);
     }
@@ -22,13 +25,15 @@ window.addEventListener("load", () => {
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
+
+display.style.display='block'
+   
   var val = cityValue.value;
-if(!val){
-  alert('Please Enter City ')
-  return
-}
-else
-  var baseurlNow = `https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=${openWatherApiKey}`;
+  if (!val) {
+    alert("Please Enter City ");
+    return;
+  } else
+    var baseurlNow = `https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=${openWatherApiKey}`;
 
   fetch(baseurlNow)
     .then((resp) => resp.json())
@@ -44,7 +49,7 @@ else
         },
       };
       //if previosuly city was  add to local storage not push to array bro
-    for (var elem of SerchHistory) {
+      for (var elem of SerchHistory) {
         if (elem.cityame === data.name) {
           isExits = true;
         }
@@ -52,7 +57,8 @@ else
       if (!isExits) {
         cities.push(obj);
       }
-
+      localStorage.setItem("cities", JSON.stringify(cities));
+  
       fetch(fiveDayBaseUrl)
         .then((response) => response.json())
         .then((data) => {
@@ -64,30 +70,46 @@ else
           var tempdoc = document.createElement("p");
           var winddoc = document.createElement("p");
           var humdoc = document.createElement("p");
+          var todayImg=document.createElement('img')
+          todayImg.setAttribute('src',"http://openweathermap.org/img/wn/"+ data.list[0].weather[0].icon +"@2x.png"  )
           tempdoc.innerHTML = `Temp: ${data.list[0].main.temp} °F`;
           winddoc.innerHTML = `Wind: ${data.list[0].wind.speed} MPH`;
           humdoc.innerHTML = `Humidity: ${data.list[0].main.humidity} %`;
           todayWeather.appendChild(CitynameDateIcon);
+          todayWeather.appendChild(todayImg)
           todayWeather.appendChild(winddoc);
           todayWeather.appendChild(humdoc);
           todayWeather.append(tempdoc);
           var weekForcast = data.list;
-
+          var newH3=document.createElement('h3')
+          newH3.innerHTML='5-day forcast'
+          newh3hold.appendChild(newH3);
           for (let i = 7; i < weekForcast.length; i = i + 8) {
             var CitynameDateIconW = document.createElement("h1");
+            var iconhold=document.createElement('img')
+            var weekHolderDiv = document.createElement("div");
+            weekHolderDiv.classList.add("weeksDiv");
             var nextDay = dayjs.unix(weekForcast[i].dt);
             CitynameDateIconW.innerHTML = `${nextDay.format("DD/MM/YYYY")}`;
             var tempdocW = document.createElement("p");
             var winddocW = document.createElement("p");
             var humdocW = document.createElement("p");
+       
+            iconhold.setAttribute('src',"http://openweathermap.org/img/wn/"+ weekForcast[i].weather[0].icon +"@2x.png"  )
             tempdocW.innerHTML = `Temp: ${data.list[i].main.temp} °F`;
             winddocW.innerHTML = `Wind: ${data.list[i].wind.speed} MPH`;
             humdocW.innerHTML = `Humidity: ${data.list[i].main.humidity} %`;
-            weekforcastEL.appendChild(CitynameDateIconW);
-            weekforcastEL.appendChild(tempdocW);
-            weekforcastEL.appendChild(winddocW);
-            weekforcastEL.append(humdocW);
+           
+            weekHolderDiv.appendChild(CitynameDateIconW);
+            weekHolderDiv.appendChild(iconhold)
+            weekHolderDiv.appendChild(tempdocW);
+            weekHolderDiv.appendChild(winddocW);
+            weekHolderDiv.append(humdocW);
+            
+            weekforcastEL.appendChild(weekHolderDiv);
           }
-        }).catch(err=>alert(err));
-    }).catch(err=>alert(err));
+        })
+        .catch((err) => alert(err));
+    })
+    .catch((err) => alert(err));
 });
