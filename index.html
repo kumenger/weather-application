@@ -11,32 +11,31 @@
 
 <body>
     <header>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus iste reiciendis perspiciatis. Laborum ipsa
-        consequatur repellendus neque, perferendis error aut doloremque impedit pariatur, porro est iure in
-        necessitatibus obcaecati fugiat!
+        <div class="main-header">
+            <h1 style="color: beige;">
+               The Weather DashBoard
+            </h1>
+        </div>
     </header>
     <main>
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
-            <div class="modal-content" id="modal-content">
-              <span class="close">&times;</span>
-              <p>Please Enter City to View Weather</p>
-            </div>
-          
-          </div>
+     
         <div class="row">
             <div class="side col-1">
                 <form>
-                    <label>City</label>
-                    <input placeholder="city" id="cityInput">
+                
+                    <input placeholder="Enter city Name " id="cityInput">
                     <button type="submit" id="submit">Search</button>
                 </form>
-                <ul id="serchHistory"></ul>
+                <ul id="serchHistory" style="text-align: center;">
+                    <h3 style="text-align: center;">Search History</h3>
+                </ul>
             </div>
-            <div class="display col-2">
+            <div class="display col-2" id="display">
                 <div id="today"></div>
-                <div id="fivedays"></div>
+              <div id="newh3hold"></div> 
+                <div id="fivedays">
+                   
+                </div>
             </div>
         </div>
     </main>
