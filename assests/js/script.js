@@ -2,6 +2,7 @@ var submit = document.getElementById("submit");
 var oEL = document.getElementById("serchHistory");
 var todayWeather = document.getElementById("today");
 var weekforcastEL = document.getElementById("fivedays");
+var modal=document.getElementById('modal-content')
 var openWatherApiKey = "87710827a4c6f11401d8a2d244caad74";
 var cityValue = document.getElementById("cityInput");
 var cities = JSON.parse(localStorage.getItem("cities") || "[]");
@@ -22,7 +23,11 @@ window.addEventListener("load", () => {
 submit.addEventListener("click", (e) => {
   e.preventDefault();
   var val = cityValue.value;
-
+if(!val){
+  alert('Please Enter City ')
+  return
+}
+else
   var baseurlNow = `https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=${openWatherApiKey}`;
 
   fetch(baseurlNow)
@@ -38,9 +43,8 @@ submit.addEventListener("click", (e) => {
           lon: data.coord.lon,
         },
       };
-      //if previosuly city was  add to local storage not push to array
-
-      for (var elem of SerchHistory) {
+      //if previosuly city was  add to local storage not push to array bro
+    for (var elem of SerchHistory) {
         if (elem.cityame === data.name) {
           isExits = true;
         }
@@ -52,8 +56,6 @@ submit.addEventListener("click", (e) => {
       fetch(fiveDayBaseUrl)
         .then((response) => response.json())
         .then((data) => {
-       
-        
           var time2 = dayjs.unix(data.list[0].dt);
           var CitynameDateIcon = document.createElement("h1");
           CitynameDateIcon.innerHTML = `${data.city.name}(${time2.format(
@@ -69,14 +71,12 @@ submit.addEventListener("click", (e) => {
           todayWeather.appendChild(winddoc);
           todayWeather.appendChild(humdoc);
           todayWeather.append(tempdoc);
-          var weekForcast=data.list
-          console.log(weekForcast)
-          for(let i=7;i<weekForcast.length;i=i+8){
+          var weekForcast = data.list;
+
+          for (let i = 7; i < weekForcast.length; i = i + 8) {
             var CitynameDateIconW = document.createElement("h1");
-            var nextDay=dayjs.unix(weekForcast[i].dt)
-            CitynameDateIconW.innerHTML = `${nextDay.format(
-              "DD/MM/YYYY"
-            )}`;
+            var nextDay = dayjs.unix(weekForcast[i].dt);
+            CitynameDateIconW.innerHTML = `${nextDay.format("DD/MM/YYYY")}`;
             var tempdocW = document.createElement("p");
             var winddocW = document.createElement("p");
             var humdocW = document.createElement("p");
@@ -88,7 +88,6 @@ submit.addEventListener("click", (e) => {
             weekforcastEL.appendChild(winddocW);
             weekforcastEL.append(humdocW);
           }
-        });
-    });
+        }).catch(err=>alert(err));
+    }).catch(err=>alert(err));
 });
-
