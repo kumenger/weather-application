@@ -19,8 +19,8 @@ function checkifChildrenEXit() {
   }
 }
 window.addEventListener("load", () => {
-  if (SerchHistory) {
-    for (var elem of SerchHistory) {
+  if (SerchHistory.length>0) {
+    for (var elem of cities) {
       var liEl = document.createElement("li");
       liEl.classList.add("styleList");
 
@@ -56,6 +56,10 @@ submit.addEventListener("click", (e) => {
           lon: data.coord.lon,
         },
       };
+      var lielhere=document.createElement('li')
+      lielhere.innerHTML=data.name;
+      lielhere.classList.add("styleList");
+      oEL.appendChild(lielhere)
       //if previosuly city was  add to local storage not push to array bro
       for (var elem of SerchHistory) {
         if (elem.cityame === data.name) {
@@ -169,4 +173,7 @@ submit.addEventListener("click", (e) => {
         .catch((err) => alert(err));
     })
     .catch((err) => alert(err));
+  
+  
+   
 });
