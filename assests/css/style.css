@@ -1,8 +1,8 @@
 .side {
     background-color: aliceblue;
     height: max-content;
-    padding: 10px;
-    text-align: left;
+ 
+
    
 
 }
@@ -16,12 +16,12 @@
     justify-content: center;
     color: rgb(243, 241, 238);
 }
-h1, h3{
-    color:rgb(17, 14, 44);
+h1,h2, h3{
+    color:rgb(74, 6, 79);
 }
 .display {
-    background-color: aquamarine;
-    height: auto;
+    background-color: rgb(93, 138, 123);
+  
     padding: 10px;
     display: none;
 
@@ -30,14 +30,14 @@ h1, h3{
 form {
     display: flex;
     flex-direction: column;
-
-    justify-content: space-around;
+     row-gap: 10px;
+    justify-content:space-around
 }
 .styleList{
-    list-style: none;
+   list-style: none;
     font-size: 15px;
     padding: 5px;
-     width: 100%;
+  
     border: 1px solid rgb(180, 124, 20);
     margin-bottom: 5px;
 }
@@ -64,6 +64,10 @@ form {
   justify-content: space-between;
   flex-wrap: wrap;
    
+}
+#today{
+  
+ 
 }
 main{
    margin: 2%;
