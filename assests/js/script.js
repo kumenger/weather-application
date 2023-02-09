@@ -12,7 +12,7 @@ localStorage.setItem("cities", JSON.stringify(cities));
 
 var isExits = false;
 window.addEventListener("load", () => {
-
+  display.style.display = "block";
   if (cities.length>0) {
     for (var elem of cities) {
       var liEl = document.createElement("li");
@@ -103,7 +103,7 @@ submit.addEventListener("click", (e) => {
       var lielhere=document.createElement('li')
       lielhere.innerHTML=data.name;
       lielhere.classList.add("styleList");
-      console.log(oEL.length)
+     
       oEL.appendChild(lielhere)
       //if previosuly city was  add to local storage not push to array bro
       if(cities.length>0){
@@ -142,6 +142,7 @@ submit.addEventListener("click", (e) => {
           humdoc.innerHTML = `Humidity: ${data.list[0].main.humidity} %`;
           todayWeather.innerHTML=''
           weekforcastEL.innerHTML=''
+          newh3hold.innerHTML=''
             todayWeather.appendChild(CitynameDateIcon);
             todayWeather.appendChild(todayImg);
             todayWeather.appendChild(winddoc);
