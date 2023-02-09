@@ -14,7 +14,7 @@
 
 N/A
 ## Workiing Application
-[Event scheduler](https://kumenger.github.io/weather-application/)
+[The Weather Dashboard](https://kumenger.github.io/weather-application/)
 
 ## Usage
 

@@ -21,6 +21,50 @@ window.addEventListener("load", () => {
       oEL.appendChild(liEl);
     }
   }
+  
+    navigator.geolocation.getCurrentPosition((p)=>{
+      let lat = p.coords.latitude;
+      let long = p.coords.longitude;
+      var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=87710827a4c6f11401d8a2d244caad74&units=imperial`;
+      
+      fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data)
+        var time2 = dayjs.unix(data.list[0].dt);
+        var CitynameDateIcon = document.createElement("h1");
+        CitynameDateIcon.innerHTML = `Your Located in ${data.city.name}(${time2.format(
+          "DD/MM/YYYY"
+        )})`;
+        var tempdoc = document.createElement("h4");
+        var winddoc = document.createElement("h4");
+        var humdoc = document.createElement("h4");
+        var todayImg = document.createElement("img");
+        todayImg.setAttribute(
+          "src",
+          "http://openweathermap.org/img/wn/" +
+            data.list[0].weather[0].icon +
+            "@2x.png"
+        );
+        tempdoc.innerHTML = `Temp: ${data.list[0].main.temp} °F`;
+        winddoc.innerHTML = `Wind: ${data.list[0].wind.speed} MPH`;
+        humdoc.innerHTML = `Humidity: ${data.list[0].main.humidity} %`;
+      
+          todayWeather.appendChild(CitynameDateIcon);
+          todayWeather.appendChild(todayImg);
+          todayWeather.appendChild(winddoc);
+          todayWeather.appendChild(humdoc);
+          todayWeather.appendChild(tempdoc);
+        
+        })
+     
+    })
+  
+
+
+
+
+  
 });
 
 submit.addEventListener("click", (e) => {
