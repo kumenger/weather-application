@@ -7,7 +7,7 @@ var display = document.getElementById("display");
 var openWatherApiKey = "87710827a4c6f11401d8a2d244caad74";
 var cityValue = document.getElementById("cityInput");
 var cities = JSON.parse(localStorage.getItem("cities") || "[]");
-var SerchHistory = JSON.parse(localStorage.getItem("cities"));
+
 localStorage.setItem("cities", JSON.stringify(cities));
 
 var isExits = false;
