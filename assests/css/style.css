@@ -20,10 +20,10 @@ h1,h2, h3{
     color:rgb(74, 6, 79);
 }
 .display {
-    background-color: rgb(93, 138, 123);
-  
-    padding: 10px;
-    display: none;
+
+
+    padding: 20px;
+    
 
 }
 
@@ -37,20 +37,21 @@ form {
    list-style: none;
     font-size: 15px;
     padding: 5px;
-  
-    border: 1px solid rgb(180, 124, 20);
+  background-color: azure;
+    border: 1px solid rgb(187, 186, 183);
     margin-bottom: 5px;
 }
 .weeksDiv {
     margin-left: 5px;
     padding: 10px;
-    border: 2px solid gold;
-   
+    background-color: azure;
+    border: 1px solid rgb(187, 186, 183);
+
   
 }
 *{
     box-sizing: border-box;
-    margin-top: 0;
+    margin-top: 5px;
 }
 
 [class*="col"] {
@@ -60,17 +61,29 @@ form {
 #fivedays{
    
   display: flex;
-
+  padding: 20px;
   justify-content: space-between;
   flex-wrap: wrap;
+  background-color: rgb(216, 225, 222);
+border: 1px solid snow;
+width: 100%;
    
 }
 #today{
-
+background-color: rgb(216, 225, 222);
+border: 1px solid snow;
+width: 100%;
+padding: 20px;
+height: min-content;
  
 }
 main{
-   margin: 2%;
+   margin: 20px;
+  
+
+}
+.row{
+    height: 60vh;
 }
 body{background-color: aliceblue;}
 
