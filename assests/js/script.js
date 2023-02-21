@@ -7,11 +7,18 @@ var display = document.getElementById("display");
 var openWatherApiKey = "87710827a4c6f11401d8a2d244caad74";
 var cityValue = document.getElementById("cityInput");
 var cities = JSON.parse(localStorage.getItem("cities") || "[]");
+var serchHistoryEL=document.getElementsByClassName('styleList')
+var errorDisaplyEL=document.getElementById('errDisaply')
 
-localStorage.setItem("cities", JSON.stringify(cities));
+oEL.addEventListener('click',function(e){
+if(e.target.tagname='li'){
+  fetchWather(e.target.innerHTML)
+}
+})
 
 var isExits = false;
 window.addEventListener("load", () => {
+
   display.style.display = "block";
   if (cities.length>0) {
     for (var elem of cities) {
@@ -23,9 +30,10 @@ window.addEventListener("load", () => {
     }
   
   }
-  
+ 
     navigator.geolocation.getCurrentPosition((p)=>{
-      
+        todayWeather.innerHTML='';
+        weekforcastEL.innerHTML=''
         let lat = p.coords.latitude;
         let long = p.coords.longitude;
         var url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=87710827a4c6f11401d8a2d244caad74&units=imperial`;
@@ -33,7 +41,7 @@ window.addEventListener("load", () => {
         fetch(url)
         .then((resp) => resp.json())
         .then((data) => {
-          console.log(data)
+         
           var time2 = dayjs.unix(data.list[0].dt);
           var CitynameDateIcon = document.createElement("h1");
           CitynameDateIcon.innerHTML = `Your Located in ${data.city.name}(${time2.format(
@@ -66,26 +74,37 @@ window.addEventListener("load", () => {
      
     })
   
-
-
+   
 
 
   
+  
 });
+
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
 
   display.style.display = "block";
-  
-
   var val = cityValue.value;
   if (!val) {
-    alert("Please Enter City ");
-    return;
-  } else 
+    errorDisaplyEL.style.display='block'
+    errorDisaplyEL.innerHTML='City Required'
 
-  var baseurlNow = `https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=${openWatherApiKey}`;
+  setInterval(() => {
+    
+    errorDisaplyEL.style.display='none'
+  }, 2000);
+  } else 
+  fetchWather(val)
+ 
+  
+  
+   
+});
+
+const fetchWather=(city)=>{
+   var baseurlNow = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${openWatherApiKey}`;
 
   fetch(baseurlNow)
     .then((resp) => resp.json())
@@ -187,7 +206,7 @@ submit.addEventListener("click", (e) => {
         .catch((err) => console.log(err));
     })
     .catch((err) => console.log(err));
-  
-  
-   
-});
+}
+
+
+
